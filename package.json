@@ -1,0 +1,34 @@
+{
+  "name": "mobrowser-hello-world",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "mobrowser dev",
+    "dev:build": "mobrowser dev:build",
+    "build": "mobrowser build",
+    "pack": "mobrowser pack",
+    "gen": "mobrowser gen",
+    "add": "mobrowser add",
+    "sbom": "mobrowser sbom",
+    "mobrowser": "mobrowser"
+  },
+  "dependencies": {
+    "@mobrowser/api": "2.17.0",
+    "@mobrowser/cli": "2.17.0"
+  },
+  "optionalDependencies": {
+    "@mobrowser/sdk-win-x64": "2.17.0"
+  },
+  "allowScripts": {
+    "@mobrowser/sdk-win-x64@2.17.0": true
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.8.3",
+    "vite": "^8.0.0"
+  },
+  "engines": {
+    "node": "^20.20.2 || ^22.22.2 || >=24.14.1"
+  }
+}

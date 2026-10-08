@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "Hello World",
+    "version": {
+      "major": "0",
+      "minor": "0",
+      "patch": "1"
+    },
+    "author": "",
+    "copyright": "",
+    "description": "",
+    "locales": ["en-US"],
+    "trustedOrigins": [],
+    "updateServerUrl": "",
+    "schemes": [],
+    "bundle": {
+      "Windows": {
+        "icon": "assets/app.ico",
+        "signCommand": "",
+        "installer": {
+          "exe": {
+            "name": "",
+            "icon": "assets/app.ico",
+            "installationGif": "",
+            "packageId": "com.mobrowser.helloworld",
+            "installationFolderName": "HelloWorld",
+            "displayName": "Hello World",
+            "deltaStrategy": "BestSpeed"
+          }
+        }
+      }
+    }
+  },
+  "automation": {
+    "mode": "interactive"
+  },
+  "native": {
+    "protobuf": {
+      "mode": "auto",
+      "toolchainMatch": "major"
+    }
+  }
+}

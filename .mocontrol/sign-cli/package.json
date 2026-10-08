@@ -1,0 +1,41 @@
+{
+  "name": "@mobrowser/sign-cli",
+  "version": "0.1.0",
+  "description": "Build, sign and package MōBrowser applications on macOS and Windows.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "mocontrol-cli": "dist/index.js",
+    "mobrowser-sign": "dist/index.js"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "!dist/test/**",
+    "assets/certificates/*.cer",
+    "scripts",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "node --input-type=module --eval \"import { rm } from 'node:fs/promises'; await rm('dist', { recursive: true, force: true });\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "prepack": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test --test-concurrency=1 dist/test/*.test.js",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": "^20.20.2 || ^22.22.2 || >=24.14.1"
+  },
+  "dependencies": {
+    "@github/keytar": "^7.10.6",
+    "commander": "^13.1.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.30",
+    "typescript": "^5.8.3"
+  }
+}
