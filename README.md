@@ -1,13 +1,32 @@
-# Hello World for Windows
+# MōBrowser App Template — Windows
 
-A minimal MoBrowser application. Run `npm ci` and `npm run dev` on a supported operating system.
+A minimal MōBrowser application for Windows x64 (EXE).
 
-MōControl creates a private repository from this template, configures its application identity, and applies a separate signing profile for each selected OS. Skipping signing creates code without publishing an installer.
+## Local development
 
-The release workflow publishes one target per attempt: macOS ARM64 DMG or Windows x64 EXE. Select the platform and version in MōControl; targets share a version but have independent progress, downloads and retries. Successful artifacts are immutable. Repositories created earlier are not automatically updated.
+Use Node.js 24 and run `npm ci`, then `npm run dev` on a supported operating system.
+`npm run build` builds the application; `npm run pack` packages it on the native platform.
+Application source, assets and build configuration live in this template.
 
-macOS uses `MAC_CERTIFICATE`, `MAC_CERTIFICATE_PWD`, `MAC_CODESIGN_IDENTITY`, `MAC_TEAM_ID`, `MAC_APPLE_ID`, and `MAC_APPLE_PASSWORD`. The legacy `MAC_KEYCHAIN_PWD` is preserved for compatibility.
+## Releases with MoControl
 
-Windows uses Azure Artifact Signing with service-principal authentication: `WINDOWS_AZURE_SIGNING_ENDPOINT`, `WINDOWS_AZURE_SIGNING_ACCOUNT_NAME`, `WINDOWS_AZURE_SIGNING_PROFILE_NAME`, `WINDOWS_AZURE_SUBSCRIPTION_ID`, `WINDOWS_AZURE_CLIENT_ID`, `WINDOWS_AZURE_TENANT_ID`, and `WINDOWS_AZURE_CLIENT_SECRET`. The workflow maps these to the signing CLI's `AZURE_*` environment variables. Values belong in encrypted GitHub secrets, never in source files.
+This template contains **no GitHub Actions workflows or managed runtime**. After creating a repository,
+[MoControl](https://github.com/mo-browser-apps/control) installs a versioned automation bundle:
 
-The bundled `.mocontrol/sign-cli` performs native signing and verification before `.mocontrol/release.mjs` uploads the installer to the authenticated release service. MōControl supplies `MOCONTROL_RELEASE_TOKEN` and the release-service variables.
+- Required **MoControl Release** at `.github/workflows/release.yml`.
+- The release helper and signing CLI under `.mocontrol/`.
+- Optional CI checks, CI/CD previews, organization workflows, and custom YAML selected during creation.
+
+The initial `0.0.1` release includes every supported platform. Choose MoControl downloads or GitHub
+Releases, and a signing profile or **Don’t sign** for each platform. Unsigned installers are still built
+and published, but operating systems may warn or require explicit permission to open them.
+Credentials belong in encrypted repository secrets, never in workflow inputs or source files.
+
+Platforms build and publish independently. Retrying a failed platform rebuilds its installer using the
+original source and settings; successful installers remain unchanged. Downloads use direct installer
+links. Private GitHub downloads require repository access. CI/CD previews use the same settings and do
+not replace the current stable release.
+
+**Adoption order:** deploy MoControl provisioning support for the canonical automation bundle before
+adopting this workflow-free template revision. Creating a repository directly from GitHub does not
+install automation. Existing application repositories are not updated automatically.
